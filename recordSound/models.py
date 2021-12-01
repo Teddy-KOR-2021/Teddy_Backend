@@ -10,7 +10,9 @@ class RecordSound(models.Model):
     title = models.CharField(max_length=100)
     recordDate = models.DateTimeField(default=datetime.now, blank=True)
     soundUrl = models.CharField(max_length=200)
-    imgUrl = models.CharField(max_length=200)
+    imgUrl1 = models.CharField(max_length=200, null=True)
+    imgUrl2 = models.CharField(max_length=200, null=True)
+    imgUrl3 = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return self.title

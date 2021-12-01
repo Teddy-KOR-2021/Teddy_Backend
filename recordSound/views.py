@@ -22,6 +22,10 @@ def recordSound_detail(request, pk):
 
 
 @api_view(['POST'])
-def transmitS3toDB(request):
-    print(request)
-    return
+def recordSound_create(request):
+    serializer = RecordSoundSerializer(data=request.data)
+    # tests.a(data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+

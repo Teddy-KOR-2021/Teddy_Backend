@@ -6,4 +6,4 @@ from recordSound.models import RecordSound
 class RecordSoundSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = RecordSound
-        fields = ['id', 'title', 'recordDate', 'soundUrl', 'imgUrl']
+        fields = ['id', 'title', 'recordDate', 'soundUrl', 'imgUrl1', 'imgUrl2', 'imgUrl3']
