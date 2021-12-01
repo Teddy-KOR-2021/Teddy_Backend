@@ -19,3 +19,11 @@ def recordSound_detail(request, pk):
     serializer = RecordSoundSerializer(recordSound, many=False)
     print(serializer)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def recordSound_create(request):
+    serializer = RecordSoundSerializer(data=request.data)
+    # tests.a(data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
