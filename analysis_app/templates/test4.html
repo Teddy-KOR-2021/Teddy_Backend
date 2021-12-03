@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var dataPoints1 = [];
+            var dataPoints2 = [];
+            var dataPoints3 = [];
+            var dataPoints4 = [];
+            var dataPoints5 = [];
+            var dataPoints6 = [];
+            var dataPoints7 = [];
+
+            var chart = new CanvasJS.Chart("chartContainer",   {
+
+                exportEnabled: true,
+
+                title:{
+                    text: "아이 감정 상태"
+                },
+                 axisX: {
+                    valueFormatString: "DD MMM,YY"
+                },
+                axisY: {
+                    title: "sentiment",
+
+                },
+                legend:{
+                    cursor: "pointer",
+                    fontSize: 16,
+                },
+                toolTip:{
+                    shared: true
+                },
+
+                data: [  {
+                        name: "anger",
+                        type: "spline",
+                        color: "red",
+                        showInLegend: true,
+                        dataPoints: dataPoints1
+                    },
+                    {
+                        name: "disgust",
+                        type: "spline",
+                        color: "navy",
+                        showInLegend: true,
+                        dataPoints: dataPoints2
+                    },
+                    {
+                        name: "fear",
+                        type: "spline",
+                        color: "purple",
+                        showInLegend: true,
+                        dataPoints: dataPoints3
+
+                    },
+                    {
+                        name: "happy",
+                        type: "spline",
+                        color: "green",
+                        showInLegend: true,
+                        dataPoints: dataPoints4
+
+                    },
+                    {
+                        name: "sad",
+                        type: "spline",
+                        color: "blue",
+                        showInLegend: true,
+                        dataPoints: dataPoints5
+
+                    },
+                    {
+                        name: "surprise",
+                        type: "spline",
+                        color: "orange",
+                        showInLegend: true,
+                        dataPoints: dataPoints6
+
+                    },
+                    {
+                        name: "neutral",
+                        type: "spline",
+                        color: "yellow",
+                        showInLegend: true,
+                        dataPoints: dataPoints7
+
+                    }]
+                });
+            function getData() {
+                $.getJSON("http://localhost:8000/analysis/dg4data1/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints1.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                $.getJSON("http://localhost:8000/analysis/dg4data2/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints2.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                $.getJSON("http://localhost:8000/analysis/dg4data3/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints3.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                $.getJSON("http://localhost:8000/analysis/dg4data4/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints4.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                $.getJSON("http://localhost:8000/analysis/dg4data5/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints5.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                $.getJSON("http://localhost:8000/analysis/dg4data6/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints6.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                $.getJSON("http://localhost:8000/analysis/dg4data7/")
+                    .then(function(data) {
+                        $.each(data, function(key, value){
+                            dataPoints7.push({ x : new Date(value.x), y: value.y});
+                        });
+                        chart.render();
+                    })
+                };
+        setTimeout(getData, 2000);
+    }
+
+function toggleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else{
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+    </script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+</body>
+</html>

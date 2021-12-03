@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<script>
+window.onload = function () {
+    function getData() {
+        $.getJSON("http://localhost:8000/dg3data/", function(data) {
+            var dataPoints = [];
+            $.each(data, function(key, value){
+                dataPoints.push({ x : new Date(value.x), y: value.y});
+            });
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title:{
+                    text: "Daily High Temperature at Different Beaches"
+                },
+                axisX: {
+                    valueFormatString: "DD MMM,YY"
+                },
+                axisY: {
+                    title: "Temperature (in °C)",
+                    suffix: " °C"
+                },
+                legend:{
+                    cursor: "pointer",
+                    fontSize: 16,
+                    itemclick: toggleDataSeries
+                },
+                toolTip:{
+                    shared: true
+                },
+                data: [{
+                    name: "Anger",
+                    type: "spline",
+                    yValueFormatString: "#0.############## °C",
+                    showInLegend: true,
+                    dataPoints: dataPoints,
+                }]
+            });
+            chart.render();
+        });
+    }
+    setInterval(getData, 2000);
+}
+
+
+function toggleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else{
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+
+}
+</script>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+</body>
+</html>
