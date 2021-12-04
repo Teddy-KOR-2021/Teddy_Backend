@@ -27,6 +27,7 @@ def recordSound_create(request):
         serializer.save()
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def mqtt_text_list(request):
     mqtt_text_list = Mqtt.objects.all()
@@ -44,16 +45,13 @@ def mqtt_text_create(request):
         return Response(serializer.data)
 
 
-# def publish(request):
-#     topic = 'iot'
-#     text = 'hello'
-#     if request.method == "POST":
-#         topic = request.POST['topic']
-#         text = request.POST['text']
-#
-#     mqttc = mqtt.Client("client2")
-#     mqttc.connect("192.168.10.20", 1883)
-#     mqttc.publish(topic, text, 1)
-#     return Response(request.data)
+def publish(request):
+    mqtt_t = Mqtt.objects.all().order_by('-id').first()
+    print(mqtt_t.text)
+    text = mqtt_t.text
+    topic = 'iot'
 
-
+    mqttc = mqtt.Client("client2")
+    mqttc.connect("18.169.185.73", 1883)
+    mqttc.publish(topic, text, 1)
+    return Response({"message": "success!"})

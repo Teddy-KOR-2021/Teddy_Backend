@@ -70,8 +70,8 @@ def dg3data(request) :
 def dg4(request) :
     recordSoundList = RecordSound.objects.all().order_by('-recordDate').first()
     # recognizeFeeling(imgUrl1)
-    print(recordSoundList)
-    print(recordSoundList.imgUrl1)
+    # print(recordSoundList)
+    # print(recordSoundList.imgUrl1)
 
     return render(request, 'test4.html', None)
 
