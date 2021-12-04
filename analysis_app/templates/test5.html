@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+    <script type="text/javascript">
+
+$(function () {
+    const sentiment = document.getElementById("sentiment").value;
+    const sentiment_json = JSON.parse(sentiment);
+
+    var dataPoint_anger= [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_anger.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].anger)
+        });
+    }
+
+    var dataPoint_disgust = [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_disgust.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].disgust)
+        });
+    }
+
+    var dataPoint_fear = [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_fear.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].fear)
+        });
+    }
+
+    var dataPoint_happy = [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_happy.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].happy)
+        });
+    }
+
+    var dataPoint_sad = [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_sad.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].sad)
+        });
+    }
+
+    var dataPoint_surprise = [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_surprise.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].surprise)
+        });
+    }
+
+    var dataPoint_neutral = [];
+    for (var i = 0; i < sentiment_json.length; i++) {
+        dataPoint_neutral.push({
+            x: new Date(sentiment_json[i].date),
+            y: parseFloat(sentiment_json[i].neutral)
+        });
+        var chart = new CanvasJS.Chart("chartContainer",   {
+                title:{
+                    text: "아이 감정 상태"
+                },
+                data: [  {
+                        type: "spline",
+                         color: "red",
+                        dataPoints: dataPoint_anger
+                    },
+                    {
+                        type: "spline",
+                        color: "dark",
+                        dataPoints: dataPoints_disgust
+                    },
+                    {
+                        type: "spline",
+                        color: "purple",
+                        dataPoints: dataPoints_fear
+                    },
+                    {
+                        type: "spline",
+                        color: "green",
+                        dataPoints: dataPoints_happy
+                    },
+                    {
+                        type: "spline",
+                        color: "blue",
+                        dataPoints: dataPoints_sad
+                    },
+                    {
+                        type: "spline",
+                        color: "orange",
+                        dataPoints: dataPoints_surprise
+                    },
+                    {
+                        type: "spline",
+                        color: "yellow",
+                        dataPoints: dataPoints_neutral
+                    }]
+            });
+            chart.render();
+        });
+    }
+    setInterval(getData, 2000);
+}
+    </script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+</body>
+</html>

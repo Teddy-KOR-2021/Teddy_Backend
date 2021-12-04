@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-40=b!9&^8989%_48!32wltoy7ce7xu#yh#ri@i+zgoy=s!!nmu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Static files (CSS, JavaScript, Images)
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'recordSound',
-    'storages',
+    'analysis_app',
 
 ]
 
@@ -94,8 +94,8 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'teddy',
-#         'USER': 'root,
-#         'PASSWORD': ‘mariadb’,
+#         'USER': 'root',
+#         'PASSWORD': 'mariadb',
 #         'HOST': '18.132.91.200',
 #         'PORT': '3306',
 #     }
