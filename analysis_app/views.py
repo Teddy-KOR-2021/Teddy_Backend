@@ -8,14 +8,13 @@ from recordSound.models import RecordSound
 # from datetime import datetime
 
 def dg6(request) :
-
-    return render(request, 'test6.html', None)
-
-def dg6data(request):
     recordSoundList = RecordSound.objects.all().order_by('-date').first()
     # recognizeFeeling(imgUrl)
     # print(recordSoundList)
     # print(recordSoundList.imgUrl)
+    return render(request, 'test6.html', None)
+
+def dg6data(request):
 
     data = []
     result = [0.079816328, 0.0213168518, 0.1004901064, 0.3011716791, 0.53008148161, 0.00311483803, 0.090287909]
