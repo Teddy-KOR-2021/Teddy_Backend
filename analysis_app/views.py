@@ -4,7 +4,7 @@ from analysis_app.models import Sentiment
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from recordSound.models import RecordSound
-# from ../../Teddy_AI/bring_face_data import *
+# from Teddy_AI.bring_face_data import *
 # from datetime import datetime
 
 def dg6(request) :
