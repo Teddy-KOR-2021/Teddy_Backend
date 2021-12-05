@@ -18,4 +18,6 @@ urlpatterns = [
     path('dg4data6/', analysis_app.views.dg4data6),
     path('dg4data7/', analysis_app.views.dg4data7),
     path('testdg5/', analysis_app.views.dg5),
+    path('testdg6/', analysis_app.views.dg6),
+    path('dg6data/', analysis_app.views.dg6data),
 ]
