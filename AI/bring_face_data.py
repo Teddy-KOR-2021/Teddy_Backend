@@ -6,10 +6,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 import os
 from torch.autograd import Variable
-import transforms as transforms
+from AI.transforms import transforms as transforms
 from skimage import io
 from skimage.transform import resize
-from models import *
+from AI.models import *
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 class_names = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
@@ -36,7 +36,7 @@ def recognizeFeeling(image):
     inputs = transform_test(img)
 
     net = VGG('VGG19')
-    checkpoint = torch.load(os.path.join('FER2013_VGG19', 'PrivateTest_model.t7'), map_location=torch.device('cpu'))
+    checkpoint = torch.load(os.path.join('AI/FER2013_VGG19', 'PrivateTest_model.t7'), map_location=torch.device('cpu'))
     net.load_state_dict(checkpoint['net'])
     net.eval()
 

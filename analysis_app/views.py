@@ -4,13 +4,12 @@ from analysis_app.models import Sentiment
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from recordSound.models import RecordSound
-# from Teddy_AI.bring_face_data import *
+from AI.bring_face_data import *
 # from datetime import datetime
 
 def dg6(request) :
     recordSoundList = RecordSound.objects.all().order_by('-date').first()
-    # recognizeFeeling(imgUrl)
-    # print(recordSoundList)
+    recognizeFeeling(recordSoundList.imgUrl)
     # print(recordSoundList.imgUrl)
     return render(request, 'test6.html', None)
 
