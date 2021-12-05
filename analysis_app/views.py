@@ -1,11 +1,16 @@
 from django.shortcuts import render
-# from ../../Teddy_AI/bring_face_data import *
-from recordSound.models import RecordSound
 from django.http import HttpResponse, JsonResponse
 from analysis_app.models import Sentiment
+# from ../../Teddy_AI/bring_face_data import *
+from recordSound.models import RecordSound
+# from django.http import HttpResponse, HttpResponseRedirect
+# import random
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# import seaborn as sns
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-
+# from datetime import datetime
 
 def dg1(request) :
     return render(request, 'test1.html', None)
@@ -57,10 +62,10 @@ def dg3(request) :
 def dg3data(request) :
     data = []
 
-    data1 = [0.99816328, 0.00013168518, 0.00004901064, 0.0011716791, 0.00008148161, 0.00011483803, 0.000287909]
+    data1 = [0.99816328, 0.79816328, 0.00013168518, 0.00004901064, 0.0011716791, 0.00008148161, 0.011483803, 0.0287909]
 
-    date1 = ['2021, 10, 20', '2021, 10, 21', '2021, 10, 22', '2021, 10, 23',
-                  '2021, 10, 24', '2021, 10, 25', '2021, 10, 26']
+    date1 = ['2021, 10, 20', '2021, 10, 20', '2021, 10, 21', '2021, 10, 22', '2021, 10, 23',
+                  '2021, 10, 24', '2021, 10, 26', '2021, 10, 26']
 
     for i in range(len(data1)):
         data.append({"x": date1[i], "y": data1[i]})
@@ -68,11 +73,6 @@ def dg3data(request) :
     return JsonResponse(data, safe=False)
 
 def dg4(request) :
-    recordSoundList = RecordSound.objects.all().order_by('-recordDate').first()
-    # recognizeFeeling(imgUrl1)
-    # print(recordSoundList)
-    # print(recordSoundList.imgUrl1)
-
     return render(request, 'test4.html', None)
 
 def dg4data1(request) :
@@ -181,8 +181,6 @@ def dg4data7(request) :
 
 
 
-
-
 def index(request):
     sentiment = Sentiment.objects.values()
     sentiment_json = json.dumps(list(sentiment), cls=DjangoJSONEncoder)
@@ -194,3 +192,23 @@ def index(request):
 
 def dg5(request) :
     return render(request, 'test5.html', None)
+
+def dg6(request) :
+    recordSoundList = RecordSound.objects.all().order_by('-date').first()
+    # recognizeFeeling(imgUrl1)
+    # print(recordSoundList)
+    # print(recordSoundList.imgUrl1)
+
+    return render(request, 'test6.html', None)
+
+def dg6data(request):
+
+    data = []
+    result = [0.079816328, 0.0213168518, 0.1004901064, 0.3011716791, 0.53008148161, 0.00311483803, 0.090287909]
+    senti = ['Anger', 'Disgust', 'Fear', 'Happy',
+             'Sad', 'Surprise', 'Neutral']
+
+    for i in range(len(senti)):
+        data.append({"label": senti[i], "y": result[i]})
+
+    return JsonResponse(data, safe=False)
