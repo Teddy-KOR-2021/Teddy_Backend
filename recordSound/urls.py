@@ -9,3 +9,4 @@ urlpatterns = [
     path('publish/list/', views.mqtt_text_list, name="mqtt_text_list"),
     # path('publish/', views.publish, name="publish"),
 ]
+
