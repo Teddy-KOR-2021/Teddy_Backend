@@ -10,7 +10,7 @@
 
 window.onload = function () {
     function getData() {
-        $.getJSON("http://localhost:8000/analysis/dg6data/", function(data) {
+        $.getJSON("http://18.169.185.73:8000/analysis/dg6data/", function(data) {
             var dataPoints = [];
             $.each(data, function(key, value){
                 dataPoints.push({ label : value.label, y: value.y});
