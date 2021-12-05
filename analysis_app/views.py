@@ -8,9 +8,6 @@ from AI.bring_face_data import *
 import re
 
 def dg6(request) :
-    #recordSoundList = RecordSound.objects.all().order_by('-date').first()
-    #ai_data = recognizeFeeling(recordSoundList.imgUrl)
-    #print(ai_data)
     return render(request, 'test6.html', None)
 
 
