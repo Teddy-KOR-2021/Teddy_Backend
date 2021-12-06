@@ -40,8 +40,8 @@ def mqtt_text_create(request):
     serializer = MqttSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        publish(request)
-        return Response(serializer.data)
+#        publish(request)
+        return publish(request)
     else:
         return Response(serializer.data)
 
@@ -49,10 +49,10 @@ def mqtt_text_create(request):
 def publish(request):
     mqtt_t = Mqtt.objects.all().order_by('-id').first()
     print(mqtt_t.text)
-    text = mqtt_t.text
+    text = f'{mqtt_t.text}'
     topic = 'iot'
 
-    mqttc = mqtt.Client("client2")
+    mqttc = mqtt.Client()
     mqttc.connect("18.169.185.73", 1883)
     mqttc.publish(topic, text, 1)
     return Response({"message": "success!"})
