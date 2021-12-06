@@ -40,7 +40,6 @@ def mqtt_text_create(request):
     serializer = MqttSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-#        publish(request)
         return publish(request)
     else:
         return Response(serializer.data)
