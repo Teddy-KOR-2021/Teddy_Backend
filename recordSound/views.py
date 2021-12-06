@@ -46,10 +46,9 @@ def mqtt_text_create(request):
     
 
 @api_view(['DELETE'])
-def mqtt_text_delete(request):
-    mqtt_t = Mqtt.objects.all().order_by('-id').first()
-    serializer = MqttSerializer(mqtt_t, many=False)
-    serializer.delete()
+def mqtt_text_delete(request, pk):
+    mqtt_t = Mqtt.objects.get(id=pk)
+    mqtt_t.delete()
     return Response({"message": "Deleted!"})
 
 
@@ -62,4 +61,6 @@ def publish(request):
     mqttc = mqtt.Client()
     mqttc.connect("18.169.185.73", 1883)
     mqttc.publish(topic, text, 1)
-    return mqtt_text_delete(request)
+
+    mqtt_t.delete()
+    return Response({"message": "Successed!"})
