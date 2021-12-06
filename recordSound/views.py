@@ -43,13 +43,6 @@ def mqtt_text_create(request):
         return publish(request)
     else:
         return Response(serializer.data)
-    
-
-@api_view(['DELETE'])
-def mqtt_text_delete(request, pk):
-    mqtt_t = Mqtt.objects.get(id=pk)
-    mqtt_t.delete()
-    return Response({"message": "Deleted!"})
 
 
 def publish(request):
@@ -63,4 +56,4 @@ def publish(request):
     mqttc.publish(topic, text, 1)
 
     mqtt_t.delete()
-    return Response({"message": "Successed!"})
+    return Response({"message": "Succeed!"})
