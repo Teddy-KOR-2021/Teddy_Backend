@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from recordSound.models import *
 from AI.bring_face_data import *
 import re
 
