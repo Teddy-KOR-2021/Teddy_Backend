@@ -12,7 +12,7 @@ def dg6(request) :
 def dg6data(request):
     data = []
     recordSoundList = RecordSound.objects.all().order_by('-date').first()
-    ai_data = str(recognizeFeeling(recordSoundList.imgUrl))
+    ai_data = str(recognizeFeeling(recordSoundList.imgUrl).round(2))
     new_data = re.sub("[^0123456789\.]", " ", ai_data)
     result = new_data.split()
     result2 = list(map(float, result))
