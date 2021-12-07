@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
 </head>
+<style>
+    .button {
+        text-align: right;
+    }
+</style>
 <body>
-    <div id="chartContainer" style="height: 300px; width: 100%;">
+    <div class = "button">
+        <a href="http://18.169.185.73:3000/"><img src="/static/images/home.png" height="70" width="70"></a>
+    </div>
+    <div id="chartContainer" style="height: 500px; width: 100%;">
     </div>
     <script type="text/javascript">
 
 window.onload = function () {
     function getData() {
+        CanvasJS.addColorSet("sentiColors",
+                    [//colorSet Array
+                    "#ff0000",
+                    "#6600ff",
+                    "#000099",
+                    "#00FF7F",
+                    "#4682B4",
+                    "#FFA500",
+                    "#FFD700",
+                    ]);
         $.getJSON("http://18.169.185.73:8000/analysis/dg6data/", function(data) {
             var dataPoints = [];
             $.each(data, function(key, value){
@@ -17,17 +35,23 @@ window.onload = function () {
             });
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
-            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            colorSet: "sentiColors",
+            dataPointMaxWidth: 80,
             title:{
+                fontFamily: "THE개이득",
                 text: "아이 현재 감정 상태"
             },
             axisY: {
-                title: "Sentiment"
+                fontFamily: "THE개이득",
+                title: "Sentiment",
+                valueFormatString: "# %",
             },
+
             data: [{
                 type: "column",
+                yValueFormatString: "#%",
                 showInLegend: true,
-                legendMarkerColor: "grey",
+                legendMarkerColor: "black",
                 legendText: "감정상태",
                 dataPoints: dataPoints
             }]
@@ -35,7 +59,7 @@ window.onload = function () {
             chart.render();
         });
     }
-    setTimeout(getData, 2000);
+    setTimeout(getData, 1000);
 }
 
 
