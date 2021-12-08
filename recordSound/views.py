@@ -28,6 +28,13 @@ def recordSound_create(request):
     return Response(serializer.data)
 
 
+@api_view(['DELETE'])
+def recordSound_delete(request, pk):
+    recordSound = RecordSound.objects.get(id=pk)
+    recordSound.delete()
+    return Response({"message": "Deleted!"})
+
+
 @api_view(['GET'])
 def mqtt_text_list(request):
     mqtt_text_list = Mqtt.objects.all()
